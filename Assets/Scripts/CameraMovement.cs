@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public GameObject target;
+    public Transform target;
 
-    public Vector3 cameraOffset;
-    private Vector3 vel = Vector3.zero;
+    private Vector3 m_Vel = Vector3.zero;
+
+    public float m_KeepDistance = 5f;
+    public float m_AbovePlayer = 20f;
+    public float m_CamSpeed = 3f;
 
     private void Start()
     {
-        cameraOffset = new Vector3(-4, 12, 0);
 
-        gameObject.transform.position = target.transform.position + cameraOffset;
+        gameObject.transform.position = new Vector3(target.position.x, transform.position.y + m_AbovePlayer, transform.position.z - m_KeepDistance);
     }
 
     private void LateUpdate()
     {
-        gameObject.transform.position = target.transform.position + cameraOffset;
+        //gameObject.transform.position = new Vector3(target.position.x, transform.position.y + 10f, transform.position.z - m_KeepDistance);
+
+        Vector3 nextCamPos = new Vector3(target.position.x, target.position.y + m_AbovePlayer, target.position.z - m_KeepDistance);
+
+        transform.position = nextCamPos;
+
+
     }
 }
