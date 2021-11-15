@@ -45,8 +45,7 @@ public class CharacterMovement : MonoBehaviour
         //Setting up initial player values
         m_PlayerPanelLocation = 0;
         m_Direction = 1;
-        Vector3 startOffset = new Vector3(0, 0, 10);
-        gameObject.transform.position = m_AllPanels[m_PlayerPanelLocation].transform.position - startOffset;
+        Vector3 startPos = new Vector3(75, 5, 97.5f);
     }
 
     private void Update()
