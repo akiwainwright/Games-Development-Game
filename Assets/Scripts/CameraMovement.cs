@@ -7,25 +7,24 @@ public class CameraMovement : MonoBehaviour
     public Transform target;
 
     private Vector3 m_Vel = Vector3.zero;
+    private Vector3 m_Offset;
 
-    public float m_KeepDistance = 5f;
-    public float m_AbovePlayer = 20f;
+    public float m_KeepDistance = 3f;
+    public float m_AbovePlayer = 3f;
     public float m_CamSpeed = 3f;
 
     private void Start()
     {
-
-        gameObject.transform.position = new Vector3(target.position.x, transform.position.y + m_AbovePlayer, transform.position.z - m_KeepDistance);
+        m_Offset = (-target.forward * m_KeepDistance) + (target.up * m_AbovePlayer);
+        gameObject.transform.position = target.position + m_Offset;
     }
 
     private void LateUpdate()
     {
-        //gameObject.transform.position = new Vector3(target.position.x, transform.position.y + 10f, transform.position.z - m_KeepDistance);
-
-        Vector3 nextCamPos = new Vector3(target.position.x, target.position.y + m_AbovePlayer, target.position.z - m_KeepDistance);
-
-        transform.position = nextCamPos;
+        Vector3 nextPos = target.position + ((-target.forward * m_KeepDistance) + (target.up * m_AbovePlayer));
+        transform.position = nextPos;
 
 
+        transform.rotation = Quaternion.LookRotation((target.position - transform.position).normalized);
     }
 }

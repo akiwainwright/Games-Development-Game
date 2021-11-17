@@ -24,6 +24,7 @@ public class CharacterMovement : MonoBehaviour
     private int m_SpacesToMove;
 
     public float moveSpeed = 0.5f;
+    [SerializeField] private float m_turnSpeed = 3f;
 
     private bool m_isMoving;
 
@@ -92,10 +93,11 @@ public class CharacterMovement : MonoBehaviour
                 m_Direction = 1;
 
                 //Checking if player can continue to move forwards
-                if (m_PlayerPanelLocation != m_AllPanels.Length)
+                if (m_PlayerPanelLocation < m_AllPanels.Length)
                 {
                     m_isMoving = true;
                     m_NextPanel = m_AllPanels[m_PlayerPanelLocation].transform.position;
+                    m_NextPanel = new Vector3(m_NextPanel.x - 2.5f, m_NextPanel.y, m_NextPanel.z - 2.5f);
                     m_NextLocation = new Vector3(m_NextPanel.x, gameObject.transform.position.y, m_NextPanel.z);
                 }
                 else
@@ -109,7 +111,7 @@ public class CharacterMovement : MonoBehaviour
             else
             {
                 m_FacingDirection = Vector3.ProjectOnPlane(m_PlayerCamera.position - transform.position, Vector3.up).normalized;
-                m_RB.transform.rotation = Quaternion.LookRotation(m_FacingDirection);
+                //m_RB.transform.rotation = Quaternion.LookRotation(m_FacingDirection);
             }
             #endregion
         }
@@ -123,7 +125,8 @@ public class CharacterMovement : MonoBehaviour
             m_FacingDirection = Vector3.ProjectOnPlane((m_NextPanel - transform.position), Vector3.up).normalized;
             if (m_FacingDirection != Vector3.zero)
             {
-                m_RB.rotation = Quaternion.LookRotation(m_FacingDirection);
+                Quaternion faceDir = Quaternion.LookRotation(m_FacingDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, faceDir, m_turnSpeed);
             }
 
             Debug.Log("Moving");
