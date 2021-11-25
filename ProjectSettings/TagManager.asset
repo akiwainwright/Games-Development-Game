@@ -11,6 +11,9 @@ TagManager:
   - Minus2
   - Minus4
   - Minus6
+  - Times2
+  - Times3
+  - Last
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,7 @@ public class CharacterMovement : MonoBehaviour
 
     private int m_PlayerPanelLocation;
     private int m_SpacesToMove;
+    private int m_Multiplier;
 
     public float moveSpeed = 0.5f;
     [SerializeField] private float m_turnSpeed = 3f;
@@ -48,6 +49,7 @@ public class CharacterMovement : MonoBehaviour
 
         //Setting up initial player values
         m_PlayerPanelLocation = 0;
+        m_Multiplier = 1;
         m_Direction = Direction.Forwards;
         Vector3 startPos = new Vector3(75, 5, 97.5f);
     }
@@ -64,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
             //Using space as input to "roll" the dice
             if(Input.GetKeyDown(KeyCode.Space) && m_SpacesToMove == 0)
             {
-                m_SpacesToMove = Random.Range(1, 6);
+                m_SpacesToMove = Random.Range(1, 6) * m_Multiplier;
 
                 Debug.Log("You rolled a: " + m_SpacesToMove);
             }
@@ -117,6 +119,7 @@ public class CharacterMovement : MonoBehaviour
             if (m_PlayerPanelLocation < m_AllPanels.Length)
             {
                 m_isMoving = true;
+                m_Multiplier = 1;
                 m_Animator.SetBool("Moving", true);
 
                 //Determinig the next panel the player moves to based on the direction they need to go
@@ -146,8 +149,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 PanelCheck(m_AllPanels[m_PlayerPanelLocation - 1]);
             }
-
-            Debug.Log("Now at panel " + m_PlayerPanelLocation);
 
             //Setting the player to face forwards relative to the board once they have stopped moving
             if (m_PlayerPanelLocation < m_AllPanels.Length)
@@ -195,6 +196,15 @@ public class CharacterMovement : MonoBehaviour
             case "Minus6":
                 m_SpacesToMove += 6;
                 m_Direction = Direction.Backwards;
+                break;
+            case "Times2":
+                m_Multiplier = 2;
+                break;
+            case "Times3":
+                m_Multiplier = 3;
+                break;
+            case "Last":
+                UnityEditor.EditorApplication.isPlaying = false;
                 break;
             default:
                 m_Direction = Direction.Forwards;
