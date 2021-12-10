@@ -23,9 +23,22 @@ public class CharacterMovement : MonoBehaviour
     private Direction m_Direction;
 
     private int m_PlayerPanelLocation;
+
     private int m_SpacesToMove;
+
+    public int SpacesToMove
+    {
+        get { return m_SpacesToMove; }
+        set { m_SpacesToMove = value; }
+    }
+
     private int m_Multiplier;
 
+    public int multiplier
+    {
+       get { return m_Multiplier; }
+       set { m_Multiplier = value;  }
+    }
     public float moveSpeed = 0.5f;
     [SerializeField] private float m_turnSpeed = 3f;
 
@@ -64,15 +77,15 @@ public class CharacterMovement : MonoBehaviour
             #region Moving with random number to emulate dice
 
             //Using space as input to "roll" the dice
-            if(Input.GetKeyDown(KeyCode.Space) && m_SpacesToMove == 0)
+            if (Input.GetKeyDown(KeyCode.Space) && m_SpacesToMove == 0)
             {
                 m_SpacesToMove = Random.Range(1, 6) * m_Multiplier;
 
                 Debug.Log("You rolled a: " + m_SpacesToMove);
             }
 
-            SetPlayerToMove();
-           
+            //SetPlayerToMove();
+
             #endregion
         }
 
@@ -110,7 +123,7 @@ public class CharacterMovement : MonoBehaviour
         #endregion
     }
 
-    private void SetPlayerToMove()
+    public void SetPlayerToMove()
     {
         if (m_SpacesToMove > 0)
         {
