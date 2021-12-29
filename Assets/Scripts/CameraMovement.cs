@@ -6,7 +6,6 @@ public class CameraMovement : MonoBehaviour
 {
     public Transform target;
 
-    private Vector3 m_Vel = Vector3.zero;
     private Vector3 m_Offset;
 
     public float m_KeepDistance = 3f;

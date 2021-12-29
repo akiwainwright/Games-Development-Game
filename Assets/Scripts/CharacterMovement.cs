@@ -134,6 +134,16 @@ public class CharacterMovement : MonoBehaviour
         m_NextPanel = panel;
     }
 
+    public void StopRunAnimaion()
+    {
+        m_Animator.SetBool("Moving", false);
+    }
+
+    public void StartVictoryAnimation()
+    {
+        m_Animator.SetTrigger("Won");
+    }
+
     private void FacePanel(GameObject nextPanel)
     {
         Vector3 playerToNextPanel = Vector3.ProjectOnPlane(nextPanel.transform.position - transform.position, Vector3.up);

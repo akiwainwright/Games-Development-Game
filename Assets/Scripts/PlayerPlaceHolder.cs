@@ -4,28 +4,41 @@ using UnityEngine;
 
 public class PlayerPlaceHolder : MonoBehaviour
 {
-    [SerializeField] private Transform Player;
-    
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform m_Player;
+
+    private void Start()
     {
-        
+        if(m_Player.gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
     }
+
+    private float offset = 1.75f;
 
     private void OnEnable()
     {
-        switch(Player.name)
+        switch(m_Player.name)
         {
             case "Player 1":
-                float offset = 1.75f;
-                transform.position = Player.transform.position + (Player.transform.forward * offset) + (Player.transform.right * -offset);
-                transform.forward = -Player.forward;
+                transform.position = m_Player.transform.position + (m_Player.transform.forward * offset) + (m_Player.transform.right * -offset);
+                transform.forward = -m_Player.forward;
                 break;
             case "Player 2":
+                transform.position = m_Player.transform.position + (m_Player.transform.forward * offset) + (m_Player.transform.right * offset);
+                transform.forward = -m_Player.forward;
                 break;
             case "Player 3":
+                transform.position = m_Player.transform.position - (m_Player.transform.forward * offset) + (m_Player.transform.right * offset);
+                transform.forward = -m_Player.forward;
                 break;
             case "Player 4":
+                transform.position = m_Player.transform.position - (m_Player.transform.forward * offset) - (m_Player.transform.right * offset);
+                transform.forward = -m_Player.forward;
                 break;
         }
     }
