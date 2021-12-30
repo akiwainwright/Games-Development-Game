@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] m_Panels;
 
     [SerializeField] private Text m_PlayerTurnText;
+    [SerializeField] private Text m_CongratsText;
     [SerializeField] private Text m_RemainingSpaces;
     [SerializeField] private Text m_SpacesLeft;
 
@@ -290,6 +291,7 @@ public class GameManager : MonoBehaviour
                                 break;
                             case PanelLandedOn.End:
                                 m_EndGameScreen.SetActive(true);
+                                m_CongratsText.text = "The Winner Is " + m_AllPlayers[playerTurn].name.ToUpper();
 
                                 m_AllPlayers[playerTurn].GetComponent<CharacterMovement>().StopRunAnimaion();
                                 m_AllPlayers[playerTurn].GetComponent<CharacterMovement>().StartVictoryAnimation();

@@ -52840,6 +52840,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 993205958}
     - target: {fileID: 2103849259421960817, guid: 0d9cb1caccba8dc40a895f09ff691833, type: 3}
+      propertyPath: m_CongratsText
+      value: 
+      objectReference: {fileID: 1690224231}
+    - target: {fileID: 2103849259421960817, guid: 0d9cb1caccba8dc40a895f09ff691833, type: 3}
       propertyPath: m_EndGameScreen
       value: 
       objectReference: {fileID: 741686701}
